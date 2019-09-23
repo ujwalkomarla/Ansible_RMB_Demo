@@ -1,0 +1,45 @@
+- name: Ensure 'rm_dest' variable is set (see README.md)
+  assert:
+    that: rm_dest is defined
+
+- name: Ensure 'structure' variable is set and one of 'role' or 'collection' (see README.md)
+  assert:
+    that: structure is defined and structure in ['role', 'collection']
+
+- name: Ensure the 'model' variable is set
+  assert:
+    that: model is defined
+
+- name: Include the model vars
+  include_vars:
+    file: "{{ model }}"
+    name: rm
+
+- name: Set the module documentation variable
+  set_fact:
+    rm_docmentation: "{{ rm['DOCUMENTATION']|from_yaml }}"
+
+- name: Set the module ansible_metada variable
+  set_fact:
+    rm_ansible_metadata: "{{ rm['ANSIBLE_METADATA']|from_yaml }}"
+
+- name: "Create the {{ structure }} directory structure"
+  file:
+    path: "{{ rm_dest }}/{{ item }}"
+    state: directory
+  with_items: "{{ directories[structure] }}"
+
+- name: Copy the license file to the resource module destination directory
+  copy:
+    src: "{{ rm['LICENSE'] | default('gpl-3.0.txt') }}"
+    dest: "{{ rm_dest }}/LICENSE.txt"
+
+- name: Ensure the 'collection_org' is set when 'structure' is set to collection
+  assert:
+    that: collection_org is defined
+  when: structure == 'collection'
+
+- name: Ensure the 'collection_name' is set when 'structure' is set to collection
+  assert:
+    that: collection_name is defined
+  when: structure == 'collection'

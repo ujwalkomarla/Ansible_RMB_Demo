@@ -1,0 +1,13 @@
+# Using Deleted without any config passed
+# Before state:
+# -------------
+# x460g2#show configuration | include "save configuration"
+#  save configuration automatic every 10 primary
+
+- name: "Disable auto-save feature"
+  exos_auto_save_cfg:
+    state: deleted
+# After state:
+# -------------
+# x460g2#show configuration | include "save configuration"
+# x460g2#

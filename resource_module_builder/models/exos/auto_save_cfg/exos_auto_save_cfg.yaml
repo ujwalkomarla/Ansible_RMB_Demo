@@ -1,0 +1,52 @@
+---
+GENERATOR_VERSION: '1.0'
+
+ANSIBLE_METADATA: |
+    {
+        'metadata_version': '1.1',
+        'status': ['preview'],
+        'supported_by': 'community'
+    }
+NETWORK_OS: exos
+RESOURCE: auto_save_cfg
+COPYRIGHT: Copyright 2019 Red Hat
+
+DOCUMENTATION: |
+  module: exos_auto_save_Cfg
+  version_added: 2.10
+  short_description: Manage automatic configuration save feature.
+  description:
+    - This module manages the automatic configuration save feature on Extreme Networks EXOS based switches.
+  author: 
+    - Ujwal Komarla (@ujwalkomarla)
+  options:
+    config:
+      description: The list of automatic configuration save options
+      type: dict
+      suboptions:
+        name:
+          description:
+            - File name to which the configuration needs to be saved.
+          type: str
+          default: "primary"
+        enable:
+          description:
+            - This is a boolean value to control the configuration auto save feature.
+          type: bool
+        interval:
+          description:
+            - Interval at which the configuration needs to be auto saved.
+          type: int
+          default: 5
+    state:
+      description:
+        - The state the configuration should be left in.
+      type: str
+      choices:
+      - replaced
+      - deleted
+      default: replaced
+
+EXAMPLES:
+  - replaced_example_01.txt
+  - deleted_example_01.txt

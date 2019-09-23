@@ -1,0 +1,18 @@
+# Using replaced
+# Before state:
+# -------------
+# x460g2#show configuration | include "save configuration"
+#  save configuration automatic every 10 primary
+
+- name: "Configure auto-save feature"
+  exos_auto_save_cfg:
+    config:
+      name: secondary
+      interval: 30
+      enable: true
+    state: replaced
+
+# After state:
+# -------------
+# x460g2#show configuration | include "save configuration"
+# save configuration automatic every 30 secondary

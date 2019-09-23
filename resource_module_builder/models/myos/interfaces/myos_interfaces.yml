@@ -1,0 +1,76 @@
+---
+GENERATOR_VERSION: '1.0'
+ANSIBLE_METADATA: |
+    {
+        'metadata_version': '1.1',
+        'status': ['preview'],
+        'supported_by': 'community'
+    }
+
+NETWORK_OS: exos
+RESOURCE: vlan
+COPYRIGHT: Copyright 2019 Red Hat
+LICENSE: gpl-3.0.txt
+
+DOCUMENTATION: |
+  module: exos_vlan 
+  version_added: 2.9
+  short_description: 'Manages vlan attributes of EXOS network devices.'
+  description:
+    - This module manages the vlan attributes on EXOS network devices.
+    - This module supports managing base attributes of VLAN, Name, ID, Interfaces,
+      Description, State
+  author: Ansible Network Engineer
+  notes:
+    - 'Tested against <network_os> <version>'
+  options:
+    config:
+      description: The provided configuration
+      type: list
+      elements: dict
+      suboptions:
+        name:
+          type: str
+          description: The name of the <resource>
+        some_string:
+          type: str
+          description:
+          - The some_string_01
+          choices:
+          - choice_a
+          - choice_b
+          - choice_c
+          default: choice_a
+        some_bool:
+          description:
+          - The some_bool.
+          type: bool
+        some_int:
+          description:
+          - The some_int.
+          type: int
+          version_added: '1.1'
+        some_dict:
+          type: dict
+          description:
+          - The some_dict.
+          suboptions:
+            property_01:
+              description:
+              - The property_01
+              type: str
+    state:
+      description:
+      - The state the configuration should be left in
+      type: str
+      choices:
+      - merged
+      - replaced
+      - overridden
+      - deleted
+      default: merged
+EXAMPLES:
+  - deleted_example_01.txt
+  - merged_example_01.txt
+  - overridden_example_01.txt
+  - replaced_example_01.txt
